@@ -5,8 +5,8 @@ server.use(express.json()); //hay una forma de llamar a server ya que este ya ti
 
 const postActivity = async (req, res) => {
     try{
-        const activities = req.body;
-        const newActivities = await createActivity (activities);
+        const { name, difficulty, duration,season, countries } = req.body;
+        const newActivities = await createActivity (name, difficulty, duration,season, countries );
 
         res.status(200).json(newActivities);
     }

@@ -1,7 +1,5 @@
-
-import validations from "./validations";
-
 import axios from "axios";
+import validations from "./validations";
 import { getCountries } from "../../redux/actions";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,7 +10,6 @@ const Form = () => {
   const countries = useSelector((state) => state.countries);
   const navigate = useNavigate();
 
-  const [errors, setErrors] = useState({});
   const [activity, setActivity] = useState({
     name: "",
     difficulty: "",
@@ -27,17 +24,24 @@ const Form = () => {
     dispatch(getCountries());
   }, [dispatch]);
 
-  const changeHandler = (event) => {
-    setActivity({
-      ...activity,
-      [event.target.name]: event.target.value,
-    });
-    setErrors(
-      validations({
-        ...activity,
-        [event.target.name]: event.target.value,
-      })
-    );
+  const [errors, setErrors] = useState({
+    name: "",
+    difficulty: "",
+    duration: "",
+    season: "",
+    countries: [],
+  });
+
+  useEffect(() => {
+    setErrors(validations(activity));
+  }, [activity]);
+
+const changeHandler = (event) => {
+    const { name, value } = event.target;
+    setActivity((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
   const handleCountrySearch = (event) => {
@@ -53,13 +57,12 @@ const Form = () => {
   };
 
   const handleAddCountry = (country) => {
-    // Verificar si el país ya está en la lista
     if (!activity.countries.includes(country.name)) {
       setActivity((prevData) => ({
         ...prevData,
         countrySearch: "",
         searchResults: [],
-        countries: [...prevData.countries, country.name], // Guarda solo el nombre del país
+        countries: [...prevData.countries, country.name]
       }));
     }
   };
@@ -67,14 +70,29 @@ const Form = () => {
   const handleRemoveCountry = (country) => {
     setActivity((prevData) => ({
       ...prevData,
-      countries: prevData.countries.filter((c) => c !== country),
+      countries: prevData.countries.filter((c) => c !== country)
     }));
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
+  
+    // Convertir el array de nombres de países a un array de IDs de países
+    const countriesIdsArray = activity.countries.map((countryName) => {
+      const country = countries.find((c) => c.name === countryName);
+      return country ? country.id : null;
+    });
+  
+    const activityData = {
+      name: activity.name,
+      difficulty: activity.difficulty,
+      duration: activity.duration,
+      season: activity.season,
+      countries: countriesIdsArray,
+    };
+  
     axios
-      .post("http://localhost:3001/activities/form", activity)
+      .post("http://localhost:3001/activities/form", activityData)
       .then((res) => {
         console.log("Response from server:", res.data);
         alert("Activity created successfully!");
@@ -88,6 +106,8 @@ const Form = () => {
         alert("Error creating activity. Please try again.");
       });
   };
+  
+  
 
   return (
     <form onSubmit={handleSubmit}>
@@ -105,6 +125,8 @@ const Form = () => {
             onChange={changeHandler}
           />
           <label>*</label>
+          {console.log(errors.name)}
+          <span>{errors.name}</span>
         </div>
         <div>
           <label>Difficulty: </label>
@@ -115,6 +137,8 @@ const Form = () => {
             onChange={changeHandler}
           />
           <label>*</label>
+          {console.log(errors.difficulty)}
+          <span>{errors.difficulty}</span>
         </div>
 
         <div>
@@ -125,6 +149,8 @@ const Form = () => {
             value={activity.duration}
             onChange={changeHandler}
           />
+          {console.log(errors.duration)}
+          <span>{errors.duration}</span>
         </div>
         <div>
           <label>Season: </label>
@@ -142,6 +168,8 @@ const Form = () => {
             <option value="Spring">Spring</option>
           </select>
           <label>*</label>
+          {console.log(errors.season)}
+          <span>{errors.season}</span>
         </div>
 
         <div>
@@ -154,6 +182,8 @@ const Form = () => {
               onChange={handleCountrySearch}
               placeholder="Search countries..."
             />
+            {console.log(errors.countries)}
+            <span>{errors.countries}</span>
             <label>*</label>
             <div>
               {activity.searchResults.map((country) => (
@@ -177,21 +207,20 @@ const Form = () => {
                   type="button"
                   onClick={() => handleRemoveCountry(country)}
                 >
-                  ❌{console.log(activity)}
+                  ❌
                 </button>
               </div>
             ))}
           </div>
           {activity.name &&
-            activity.difficulty &&
-            activity.season &&
-            activity.countries.length > 0 &&
+          activity.difficulty &&
+          activity.season &&
+          activity.countries.length > 0 &&
           Object.keys(errors).length === 0 ? (
             <button>CREATE ACTIVITY</button>
           ) : (
             <button disabled>Some fields are missing</button>
           )}
-          {console.log(errors)}
         </div>
       </div>
     </form>
@@ -200,7 +229,117 @@ const Form = () => {
 
 export default Form;
 
+//   return (
+//     <form onSubmit={handleSubmit}>
+//       <div>
+//         <div>
+//           <h2>CREATE ACTIVITY FOR YOUR COUNTRIES</h2>
+//         </div>
 
+//         <div>
+//           <label>Name: </label>
+//           <input
+//             type="text"
+//             name="name"
+//             value={activity.name}
+//             onChange={changeHandler}
+//           />
+//           <label>*</label>
+//         </div>
+//         <div>
+//           <label>Difficulty: </label>
+//           <input
+//             type="number"
+//             name="difficulty"
+//             value={activity.difficulty}
+//             onChange={changeHandler}
+//           />
+//           <label>*</label>
+//         </div>
+
+//         <div>
+//           <label>Duration: </label>
+//           <input
+//             type="time"
+//             name="duration"
+//             value={activity.duration}
+//             onChange={changeHandler}
+//           />
+//         </div>
+//         <div>
+//           <label>Season: </label>
+//           <select
+//             name="season"
+//             value={activity.season}
+//             onChange={changeHandler}
+//           >
+//             <option value="" disabled>
+//               Select a season
+//             </option>
+//             <option value="Summer">Summer</option>
+//             <option value="Autumn">Autumn</option>
+//             <option value="Winter">Winter</option>
+//             <option value="Spring">Spring</option>
+//           </select>
+//           <label>*</label>
+//         </div>
+
+//         <div>
+//           <label>Countries: </label>
+//           <div>
+//             <input
+//               type="text"
+//               name="countries"
+//               value={activity.countrySearch}
+//               onChange={handleCountrySearch}
+//               placeholder="Search countries..."
+//             />
+//             <label>*</label>
+//             <div>
+//               {activity.searchResults.map((country) => (
+//                 <div
+//                   key={country.name}
+//                   onClick={() => handleAddCountry(country)}
+//                 >
+//                   {country.name}
+//                   {activity.countries.includes(country.name) && (
+//                     <span>Added</span>
+//                   )}
+//                 </div>
+//               ))}
+//             </div>
+//           </div>
+//           <div>
+//             {activity.countries.map((country) => (
+//               <div key={country}>
+//                 <span>{country}</span>
+//                 <button
+//                   type="button"
+//                   onClick={() => handleRemoveCountry(country)}
+//                 >
+//                   ❌{console.log(activity)}
+//                 </button>
+//               </div>
+//             ))}
+//           </div>
+//           {activity.name &&
+//             activity.difficulty &&
+//             activity.season &&
+//             activity.countries.length > 0 &&
+//           Object.keys(errors).length === 0 ? (
+//             <button>CREATE ACTIVITY</button>
+
+//           ) : (
+//             <button disabled>Some fields are missing</button>
+//           )}
+//           {console.log(errors)}
+//         </div>
+//       </div>
+//     </form>
+//   );
+// };
+
+// export default Form;
 
 // import validations from "./validations";
 
@@ -214,7 +353,7 @@ export default Form;
 //   const dispatch = useDispatch();
 //   const countries = useSelector((state) => state.countries);
 //   const navigate = useNavigate();
-  
+
 //   const [activity, setActivity] = useState({
 //     name: "",
 //     difficulty: "",
@@ -310,119 +449,3 @@ export default Form;
 //         alert("Error creating activity. Please try again.");
 //       });
 //   };
-
-//   return (
-//     <form onSubmit={handleSubmit} >
-//       <div>
-//         <div>
-//           <h2>CREATE ACTIVITY FOR YOUR COUNTRIES</h2>
-//         </div>
-
-//         <div>
-//           <label>Name: </label>
-//           <input
-//             type="text"
-//             name="name"
-//             value={activity.name}
-//             onChange={changeHandler}
-//           />
-//           <label>*</label>
-//           {/* {console.log(errors.name)}
-//           <span>{errors.name}</span> */}
-//         </div>
-//         <div>
-//           <label>Difficulty: </label>
-//           <input
-//             type="number"
-//             name="difficulty"
-//             value={activity.difficulty}
-//             onChange={changeHandler}
-//           />
-//           <label>*</label>
-//           {/* {console.log(errors.difficulty)}
-//           <span>{errors.difficulty}</span> */}
-//         </div>
-
-//         <div>
-//           <label>Duration: </label>
-//           <input
-//             type="time"
-//             name="duration"
-//             value={activity.duration}
-//             onChange={changeHandler}
-//           />
-//           {/* {console.log(errors.duration)}
-//           <span>{errors.duration}</span> */}
-//         </div>
-//         <div>
-//           <label>Season: </label>
-//           <select
-//             name="season"
-//             value={activity.season}
-//             onChange={changeHandler}
-//           >
-//             <option value="" disabled>
-//               Select a season
-//             </option>
-//             <option value="Summer">Summer</option>
-//             <option value="Autumn">Autumn</option>
-//             <option value="Winter">Winter</option>
-//             <option value="Spring">Spring</option>
-//           </select>
-//           <label>*</label>
-//           {/* {console.log(errors.season)}
-//           <span>{errors.season}</span> */}
-//         </div>
-
-//         <div>
-//           <label>Countries: </label>
-//           <div>
-//             <input
-//               type="text"
-//               name="countries"
-//               value={activity.countrySearch}
-//               onChange={handleCountrySearch}
-//               placeholder="Search countries..."
-//             />
-//             {/* {console.log(errors.countries)}
-//             <span>{errors.countries}</span> */}
-//             <label>*</label>
-//             <div>
-//               {activity.searchResults.map((country) => (
-//                 <div
-//                   key={country.name}
-//                   onClick={() => handleAddCountry(country)}
-//                 >
-//                   {country.name}
-//                   {activity.countries.includes(country.name) && (
-//                     <span>Added</span>
-//                   )}
-//                 </div>
-//               ))}
-//             </div>
-//           </div>
-//           <div>
-//             {activity.countries.map((country) => (
-//               <div key={country}>
-//                 <span>{country}</span>
-//                 <button
-//                   type="button"
-//                   onClick={() => handleRemoveCountry(country)}
-//                 >
-//                   ❌
-//                 </button>
-//               </div>
-//             ))}
-//           </div>
-//           {Object.keys(errors).length === 0 ? (
-//             <button>CREATE ACTIVITY</button>
-//           ) : (
-//             <button disabled>Some fields are missing</button>
-//           )}
-//         </div>
-//       </div>
-//     </form>
-//   );
-// };
-
-// export default Form;

@@ -3,7 +3,7 @@ const { Country, Activity } = require('../db');
 
   const getCountries = async () => {
     const countries = await Country.findAll({
-      include: {
+       include: {
           model: Activity,
           through: {
               attributes: [],

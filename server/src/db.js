@@ -1,7 +1,7 @@
 require("dotenv").config();
 const { Sequelize } = require("sequelize");
-const CountryModel = require("./models/Country");
-const ActivityModel = require("./models/Activity");
+// const CountryModel = require("./models/Country");
+// const ActivityModel = require("./models/Activity");
 
 const fs = require('fs');
 const path = require('path');
@@ -32,8 +32,8 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
-CountryModel(sequelize);
-ActivityModel(sequelize);
+// CountryModel(sequelize);
+// ActivityModel(sequelize);
 
 const { Country, Activity } = sequelize.models;
 

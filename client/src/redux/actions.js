@@ -138,7 +138,7 @@ export const combinedFilters = (order, continent, activity) => {
 
       return dispatch({ type: COMBINED_FILTERS, payload: filterCountries });
     } catch (error) {
-      console.error("Error fetching data:", error);
+      alert("Error fetching data:", error);
     }
   };
 };
@@ -155,7 +155,7 @@ export const getCountries = () => {
                 payload: data,
             })
         } catch (error) {
-            console.log(error.message);
+            alert(error.message);
         }
     }
 };
@@ -170,7 +170,7 @@ export const getActivities = () => {
           payload: data
         });
       } catch (error) {
-        console.log(error.message);
+        alert(error.message);
       }
     };
   };
@@ -187,7 +187,7 @@ export const getActivities = () => {
         payload: data,
       });
     } catch (error) {
-      console.log(error.message);
+      alert(error.message);
     }
   };
 };
