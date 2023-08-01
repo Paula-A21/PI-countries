@@ -1,0 +1,33 @@
+/* Estilos para el contenedor principal */
+div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 20px;
+  }
+  
+  /* Estilos para los select */
+  select {
+    margin-bottom: 10px;
+  }
+  
+  /* Estilos para los pequeños textos (small) */
+  small {
+    font-size: 12px;
+    margin-right: 5px;
+  }
+  
+  /* Estilos para la SearchBar */
+  .SearchBar {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  
+  /* Estilos para agrupar cada select con su small */
+  .select-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
