@@ -9,14 +9,14 @@ const SearchBar = () => {
     const [searchName, setSearchName] = useState('');
     
     useEffect(() => {
-        if (searchName.length) {
-          dispatch(searchCountry(searchName));
-        } else {
-          dispatch(getCountries());
+        if (searchName.length) { //este use effect logra que como está escuchando 
+          dispatch(searchCountry(searchName));//los cambios que hay en el search
+        } else {                  //me vaya mostrando resultados a medida de que busco un país
+          dispatch(getCountries()); 
         }
-      }, [searchName]);
+      }, [searchName]); 
     
-    const handleInputChange = (event) => {
+    const handleInputChange = (event) => { 
         setSearchName(event.target.value);
     };
     

@@ -10,9 +10,7 @@ import {
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Cards from "../../components/Cards/Cards";
-import style from "./Home.module.css"
-
-
+import style from "./Home.module.css";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -23,11 +21,12 @@ const Home = () => {
   const countries = useSelector((state) => state.countries);
   const activities = useSelector((state) => state.activities);
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [countriesPerPage, setCountriesPerPage] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1); //inicio el estado en uno porque es la primera página
+  const [countriesPerPage, setCountriesPerPage] = useState(10); //solo se muestran 10 países por página
 
-  const indexOfLastCountry = currentPage * countriesPerPage;
-  const indexOfFirstCountry = indexOfLastCountry - countriesPerPage;
+  //multiplico la página actual por los 10 países que muestro por página
+  const indexOfLastCountry = currentPage * countriesPerPage; //lo guardo como un index para en la segunda página empezar a partir ultimo país mostrado
+  const indexOfFirstCountry = indexOfLastCountry - countriesPerPage; //me guardo cual va a ser el primer país a mostrar
   const currentCountries = countries.slice(
     indexOfFirstCountry,
     indexOfLastCountry
@@ -38,24 +37,27 @@ const Home = () => {
   };
 
   useEffect(() => {
-    dispatch(getCountries());
-    dispatch(getActivities());
+    dispatch(getCountries()); //a penas empieza la página uso un use effect para que ya tenga cargados
+    dispatch(getActivities()); //los paises y las actividades
   }, [dispatch]);
 
   useEffect(() => {
     if (order || filterContinent || filterActivity)
-      dispatch(combinedFilters(order, filterContinent, filterActivity));
+      //tengo un use effect para que escuche si hay un cambio en cualquiera de los filtros
+      dispatch(
+        combinedFilters(order, filterContinent, filterActivity)
+      ); //despacho los filtros hacia la action combined filters
     else dispatch(getCountries());
   }, [order, filterContinent, filterActivity]);
 
   const orderedCountriesHandler = (event) => {
-    dispatch(setOrder(event.target.value));
-    setCurrentPage(1);
+    dispatch(setOrder(event.target.value)); //cada vez que seteo un nuevo orden despacho el valor de este
+    setCurrentPage(1); //y devuelvo a la primera pagina
   };
 
   const filteredContinentHandler = (event) => {
-    dispatch(setFilterContinent(event.target.value));
-    setCurrentPage(1);
+    dispatch(setFilterContinent(event.target.value)); //tengo un dispatch para mandar cual es la acción específica
+    setCurrentPage(1); //y que se guarde en el reducer y los estados los tengo guardados arriba
   };
 
   const filteredActivityHandler = (event) => {
@@ -66,8 +68,11 @@ const Home = () => {
   return (
     <div>
       <div>
-          <small className={style.small}>Order by: </small>
-        <select onChange={(event) => orderedCountriesHandler(event)} className={style.select}>
+        <small className={style.small}>Order by: </small>
+        <select
+          onChange={(event) => orderedCountriesHandler(event)} 
+          className={style.select}
+        >
           <option value="">None</option>
           <option value="asc">Ascending Name</option>
           <option value="desc">Descending Name</option>
@@ -76,7 +81,10 @@ const Home = () => {
         </select>
 
         <small className={style.small}>Filter by continent: </small>
-        <select onChange={(event) => filteredContinentHandler(event)} className={style.select}>
+        <select
+          onChange={(event) => filteredContinentHandler(event)}
+          className={style.select}
+        >
           <option value="">All</option>
           <option value="Africa">Africa</option>
           <option value="Antarctica">Antarctica</option>
@@ -88,7 +96,10 @@ const Home = () => {
         </select>
 
         <small className={style.small}>Filter by activity type: </small>
-        <select onChange={(event) => filteredActivityHandler(event)} className={style.select}>
+        <select
+          onChange={(event) => filteredActivityHandler(event)}
+          className={style.select}
+        >
           <option value="">None</option>
           {activities?.map((activity) => (
             <option value={activity.name} key={activity.id}>
@@ -101,14 +112,14 @@ const Home = () => {
       {currentCountries.length > 0 ? ( // Verificar si hay países para mostrar
         <Cards currentCountries={currentCountries} />
       ) : (
-        <p>
+        <h1 className={style.noCounty}>
           No countries were found with the specified filters or search terms.
-        </p>
+        </h1>
       )}
-      <Paginated
+      <Paginated //renderizo la paginación y la información
         countriesPerPage={countriesPerPage}
-        countries={countries.length}
-        paginated={paginated}
+        countries={countries.length} //le paso el largo para hacer la division de cuantos países voy a mostrar por página, para calcular las páginas que tengo en total
+        paginated={paginated}  //funcion que setea la página actual
         currentPage={currentPage}
       />
     </div>

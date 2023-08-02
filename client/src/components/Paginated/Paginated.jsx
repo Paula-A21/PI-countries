@@ -4,7 +4,7 @@ const Paginated = ({ countriesPerPage, countries, paginated, currentPage }) => {
   const totalPages = Math.ceil(countries / countriesPerPage);
 
   // Función para ir a una página específica
-  const goToPage = (pageNumber) => {
+  const goToPage = (pageNumber) => { //cada vez que se cambia de página con el boton > le sumo uno a la pagina actual
     if (pageNumber >= 1 && pageNumber <= totalPages) {
       paginated(pageNumber);
     }
@@ -15,10 +15,7 @@ const Paginated = ({ countriesPerPage, countries, paginated, currentPage }) => {
   const maxNearbyPages = 2; // Cantidad de páginas cercanas a mostrar (2 a la izquierda y 2 a la derecha)
 
   for (
-    let i = currentPage - maxNearbyPages;
-    i <= currentPage + maxNearbyPages;
-    i++
-  ) {
+    let i = currentPage - maxNearbyPages; i <= currentPage + maxNearbyPages; i++) {
     if (i > 0 && i <= totalPages) {
       // le resto 2 para que lo primero que muestr es 2 páginas antes
       nearbyPages.push(i); //le sumo 2 si i es menor o igual a la página actual + 2, o sea, para mostrar las dos de la derecha
@@ -27,8 +24,8 @@ const Paginated = ({ countriesPerPage, countries, paginated, currentPage }) => {
 
   return (
     <nav className={style.paginate}>
-      {/* Botón para ir a la primera página */}
 
+      {/* Botón para ir a la primera página */}
       <button onClick={() => goToPage(1)} disabled={currentPage === 1}>
         First Page
       </button>
@@ -39,7 +36,7 @@ const Paginated = ({ countriesPerPage, countries, paginated, currentPage }) => {
         onClick={() => goToPage(currentPage - 1)}
         disabled={currentPage === 1}
       >
-        &lt;
+        &lt; {/*esto representa al símbolo >, para ir a la siguiente página*/}
       </button>
 
       {nearbyPages.map((pageNumber) => (
@@ -54,12 +51,11 @@ const Paginated = ({ countriesPerPage, countries, paginated, currentPage }) => {
       ))}
 
       {/* Botón para avanzar una página */}
-
       <button
-        onClick={() => goToPage(currentPage + 1)}
+        onClick={() => goToPage(currentPage + 1)} 
         disabled={currentPage === totalPages}
       >
-        &gt; {/*esto representa al símbolo >, para ir a la siguiente página*/}
+        &gt; 
       </button>
 
       {/* Botón para ir a la última página */}

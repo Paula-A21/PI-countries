@@ -9,7 +9,7 @@ import style from "./Form.module.css";
 const Form = () => {
   const dispatch = useDispatch();
   const countries = useSelector((state) => state.countries);
-  const navigate = useNavigate();
+  const navigate = useNavigate(); //cada vez que creo una actividad me devuelve al form
 
   const [activity, setActivity] = useState({
     name: "",
@@ -27,15 +27,15 @@ const Form = () => {
 
   const [errors, setErrors] = useState({});
 
-  useEffect(() => {
-    setErrors(validations(activity));
+  useEffect(() => {// un use effect para validar los errores, 
+    setErrors(validations(activity)); //porque sino quedan desfasados y no perimite crear la actividad
   }, [activity]);
 
   const [selectedCountry, setSelectedCountry] = useState(null);
 
   const changeHandler = (event) => {
     const { name, value } = event.target;
-    setActivity((prevData) => ({
+    setActivity((prevData) => ({ //le paso al estado de las actividades los nuevos valores ingresados 
       ...prevData,
       [name]: value,
     }));
@@ -47,7 +47,7 @@ const Form = () => {
       country.name.toLowerCase().includes(countrySearched)
     );
 
-    // Exclude countries that are already in the activity
+    // Excluye los países que ya están seleccionados
     const availableCountries = filteredCountries.filter(
       (country) => !activity.countries.includes(country.id)
     );
@@ -63,12 +63,12 @@ const Form = () => {
     if (!activity.countries.includes(country.name)) {
       setActivity((prevData) => ({
         ...prevData,
-        countrySearch: "",
-        searchResults: [],
-        countries: [...prevData.countries, country.name],
+        countrySearch: "", //una vez que voy a agregar la actividad, devuelvo
+        searchResults: [], //los estados a su origen
+        countries: [...prevData.countries, country.name]
       }));
 
-      setSelectedCountry(country.name);
+      setSelectedCountry(country.name); //guardo el estado local con los paises relacionados a la actividad
     }
   };
 
@@ -80,20 +80,20 @@ const Form = () => {
   };
 
   const handleSubmit = (event) => {
-    event.preventDefault();
+    event.preventDefault(); //esto evita que se recarge la página por el evento submit
 
     // Convertir el array de nombres de países a un array de IDs de países
-    const countriesIdsArray = activity.countries.map((countryName) => {
-      const country = countries.find((c) => c.name === countryName);
+    const countriesIdsArray = activity.countries.map((countryName) => {//para pasarle a la BD el id del país y que lo relacione
+      const country = countries.find((c) => c.name === countryName); // en la tabla intermedia
       return country ? country.id : null;
     });
 
-    const activityData = {
+    const activityData = { //le paso los datos con los de la actividad
       name: activity.name,
       difficulty: activity.difficulty,
       duration: activity.duration,
       season: activity.season,
-      countries: countriesIdsArray,
+      countries: countriesIdsArray //con los id de los países para uqe haga la relacion
     };
 
     axios
@@ -113,7 +113,7 @@ const Form = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className={style.formContainer}>
+    <form onSubmit={handleSubmit} className={style.formContainer}> {/*el handle submit es para cuando se crea una actividad*/}
       <div>
         <div className={style.formField}>
           <label>Name: </label>
@@ -147,7 +147,6 @@ const Form = () => {
             name="duration"
             value={activity.duration}
             onChange={changeHandler}
-            placeholder="Search countries..."
           />
           {errors.countries && (
             <span className={style.formError}>{errors.countries}</span>
@@ -161,7 +160,7 @@ const Form = () => {
             onChange={changeHandler}
           >
             <option value="" disabled>
-              Select a season
+              Select a season:
             </option>
             <option value="Summer">Summer</option>
             <option value="Autumn">Autumn</option>
@@ -187,7 +186,7 @@ const Form = () => {
               <span className={style.formError}>{errors.countries}</span>
             )}
             <div className={style.searchResults}>
-              {activity.searchResults.map((country) => (
+              {activity.searchResults.map((country) => ( //mapeo los países para buscarlos y que me vaya mostrando las opciones
                 <div
                   key={country.name}
                   className={`${style.searchResultItem} ${
@@ -195,7 +194,7 @@ const Form = () => {
                   }`}
                   onClick={() => handleAddCountry(country)}
                 >
-                  {country.name}
+                  {country.name} {/*me muestra el país seleccionado*/}
                   {activity.countries.includes(country.name) && (
                     <span className={style.addedIndicator}>Added</span>
                   )}
@@ -216,8 +215,8 @@ const Form = () => {
               </div>
             ))}
           </div>
-          {activity.name &&
-          activity.difficulty &&
+          {activity.name && //solo si se completan todos los campos requeridos 
+          activity.difficulty && //se habilita el botón para crear la actividad
           activity.season &&
           activity.countries.length > 0 &&
           Object.keys(errors).length === 0 ? (

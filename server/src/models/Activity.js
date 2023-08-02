@@ -22,21 +22,13 @@ module.exports = (sequelize) => {
             allowNull: false
         },
         duration:{
-            //postgres quizás no acepta TIME, así que debería probar usar DATE y sacar solo la hora
-            //type: DataTypes.DATE
             type: DataTypes.TIME,
-            // type: DataTypes.INTEGER,
-            // validate:{
-            //     "max":24,
-            //     "min":1
-            // },
             allowNull: true
         },
         season:{
             type: DataTypes.ENUM("Summer", "Spring", "Winter", "Autumn"),
             allowNull:false
         },
-        
     },
     {
         timestamps:false

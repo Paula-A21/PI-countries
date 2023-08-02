@@ -1,11 +1,17 @@
+.small{
+  color: #fff;
+}
 
+.noCounty{
+  color: #fff;
+  font-size: 24px;
+}
 
 .select-container {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
 }
-
 
 .select {
   padding: 8px;

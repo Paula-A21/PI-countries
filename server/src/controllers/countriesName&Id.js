@@ -33,7 +33,7 @@ const countryByName = async (name) => {
         }
     });
     
-    if(!country) throw Error('The country with that name does not exist');
+    if(!country) throw Error('Does not exist a country with that name');
     
     return country;
 };

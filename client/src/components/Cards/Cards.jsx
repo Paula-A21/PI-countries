@@ -2,7 +2,7 @@ import Card from '../Card/Card';
 import React from "react";
 import style from "./Cards.module.css";
 
-function Cards({ currentCountries }) { //recibe props desde Paginated
+function Cards({ currentCountries }) { //recibe props desde Home, para mostrar solo los 10 países actuales
 
   return (
     <div className={style.cardsContainer}>

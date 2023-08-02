@@ -36,7 +36,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
           ...state,
           countries: payload,
         };
-      
+        
     case SET_ORDER:
       return {
         ...state,
