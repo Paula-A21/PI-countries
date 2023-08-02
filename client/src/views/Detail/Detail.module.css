@@ -1,0 +1,50 @@
+.detailContainer {
+    font-family: "Roboto", sans-serif;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* background-color: rgba(255, 255, 255, 0.5); */
+    background: #6495ed;
+background: linear-gradient(273deg,#6495ed 0%, #008b8b 20%);
+background: -webkit-linear-gradient(273deg,#6495ed 0%, #008b8b 20%);
+background: -moz-linear-gradient(273deg,#6495ed 0%, #008b8b 20%);
+}
+  
+  .detailHeading {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    /* color: darkcyan; */
+  }
+  
+  .detailItem {
+    display: flex;
+    margin-bottom: 10px;
+    margin-left: 10px;
+  }
+  
+  .detailLabel {
+    flex: 5;
+    font-size: 24px;
+    font-weight: bold;
+    /* color: cornflowerblue; */
+  }
+  
+  .detailValue {
+    font-size: 24px;
+    /* color: cornflowerblue; */
+    flex: 4;
+  }
+  
+  .detailImage {
+    display: block;
+    margin: 20px auto;
+    max-width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  

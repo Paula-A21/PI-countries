@@ -10,7 +10,6 @@ import {
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Cards from "../../components/Cards/Cards";
-import SearchBar from "../../components/SearchBar/SearchBar";
 import style from "./Home.module.css"
 
 
@@ -67,7 +66,6 @@ const Home = () => {
   return (
     <div>
       <div>
-      <SearchBar className={style.SearchBar}/>
           <small className={style.small}>Order by: </small>
         <select onChange={(event) => orderedCountriesHandler(event)} className={style.select}>
           <option value="">None</option>
@@ -92,7 +90,6 @@ const Home = () => {
         <small className={style.small}>Filter by activity type: </small>
         <select onChange={(event) => filteredActivityHandler(event)} className={style.select}>
           <option value="">None</option>
-          <option value="Any">Any</option>
           {activities?.map((activity) => (
             <option value={activity.name} key={activity.id}>
               {activity.name}

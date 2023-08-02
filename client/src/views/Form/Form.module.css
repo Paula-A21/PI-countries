@@ -1,0 +1,118 @@
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 87vh;
+    color: white;
+  }
+  .searchResults {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+    max-height: 150px;
+    overflow-y: auto;
+  }
+  
+  .selectedCountry {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+
+  .searchResultItem {
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  .formTitle {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .formField {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+  }
+  
+  .formField label {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .formField input,
+  .formField select {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .formField input[type="time"] {
+    width: 100%;
+  }
+  
+  .formField select {
+    width: 100%;
+  }
+  
+  .formError {
+    color: white;
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+    background-color: red;
+    text-align: center;
+    border-radius: 10px;
+  }
+  
+  .formCountrySearch {
+    position: relative;
+  }
+  
+  .formCountrySearch input {
+    padding: 0.5rem;
+    font-size: 1rem;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .formCountrySearch .searchResults {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    background-color: #373737;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    max-height: 150px;
+    overflow-y: auto;
+  }
+  
+  .formCountrySearch .searchResults div {
+    padding: 0.5rem;
+    cursor: pointer;
+  }
+  
+  .formButton {
+    background-color: #007bff;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .formButton:disabled {
+    background-color: #9e0202;
+    cursor: not-allowed;
+  }
+  

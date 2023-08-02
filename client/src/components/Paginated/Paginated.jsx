@@ -1,3 +1,5 @@
+import style from "./Paginated.module.css";
+
 const Paginated = ({ countriesPerPage, countries, paginated, currentPage }) => {
   const totalPages = Math.ceil(countries / countriesPerPage);
 
@@ -24,7 +26,7 @@ const Paginated = ({ countriesPerPage, countries, paginated, currentPage }) => {
   }
 
   return (
-    <nav>
+    <nav className={style.paginate}>
       {/* Botón para ir a la primera página */}
 
       <button onClick={() => goToPage(1)} disabled={currentPage === 1}>
@@ -45,6 +47,7 @@ const Paginated = ({ countriesPerPage, countries, paginated, currentPage }) => {
           key={pageNumber}
           onClick={() => goToPage(pageNumber)}
           // Agregar la clase "active" si la página es la actual
+          className={pageNumber === currentPage ? style.active : ""}
         >
           {pageNumber}
         </button>

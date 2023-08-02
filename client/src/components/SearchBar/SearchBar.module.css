@@ -1,0 +1,29 @@
+.SearchBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.inputSearch {
+  padding: 10px;
+  border: 2px solid #007bff;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 300px;
+  outline: none;
+}
+
+.inputSearch::placeholder {
+  color: #ccc;
+}
+
+.inputSearch:focus {
+  border-color: #0056b3;
+}
+
+@media screen and (max-width: 768px) {
+  .inputSearch {
+    width: 100%;
+  }
+}

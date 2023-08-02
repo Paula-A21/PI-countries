@@ -24,6 +24,61 @@ export const setFilterActivity = (activity) => {
   return { type: SET_FILTER_ACTIVITY, payload: activity };
 };
 
+
+export const getCountries = () => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.get(`${ENDPOINT}/countries`);
+
+            if(!data) throw Error('The countries were not found, check the database');
+
+            return dispatch({
+                type: GET_COUNTRIES,
+                payload: data,
+            })
+        } catch (error) {
+            alert(error.message);
+        }
+    }
+};
+
+export const getActivities = () => {
+    return async function (dispatch) {
+      try {
+        const { data } = await axios.get(`${ENDPOINT}/activities`);
+        
+        return dispatch({
+          type: GET_ACTIVITIES,
+          payload: data
+        });
+      } catch (error) {
+        alert(error.message);
+      }
+    };
+  };
+
+  
+  export const searchCountry = (name) => {
+  return async function (dispatch) {
+    try {
+      const { data } = await axios.get(
+        `${ENDPOINT}/countries/name?name=${name}`
+        );
+        return dispatch({
+        type: SEARCH_COUNTRY,
+        payload: data,
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+};
+
+
+
+
+
+
 export const combinedFilters = (order, continent, activity) => {
 
   return async (dispatch) => {
@@ -51,10 +106,7 @@ export const combinedFilters = (order, continent, activity) => {
         );
       } else if (!order && !continent && activity) {
         // Filtrar por actividad si se proporciona solo el parámetro 'activity'
-        if(activity === "") filterCountries;
-        else if (activity === "Any") {
-          filterCountries = filterCountries.filter((country) => country.Activities);
-        }
+        if(activity === "") filterCountries
         else{
           filterCountries = filterCountries.filter((country) =>
             country.Activities.some((act) => act.name === activity)//some comprueba si almenos un elemento cumple con la condicion
@@ -78,9 +130,6 @@ export const combinedFilters = (order, continent, activity) => {
       } else if (order && !continent && activity) {
         // Filtrar por orden y actividad si se proporcionan 'order' y 'activity'
         if(activity === "") filterCountries;
-        else if (activity === "Any") {
-          filterCountries = filterCountries.filter((country) => country.Activities);
-        }
         else{
           filterCountries = filterCountries.filter((country) =>
             country.Activities.some((act) => act.name === activity)
@@ -102,9 +151,6 @@ export const combinedFilters = (order, continent, activity) => {
           (country) => country.continent === continent
         );
         if(activity === "") filterCountries;
-        else if (activity === "Any") {
-          filterCountries = filterCountries.filter((country) => country.Activities);
-        }
         else{
           filterCountries = filterCountries.filter((country) =>
             country.Activities.some((act) => act.name === activity)
@@ -116,9 +162,6 @@ export const combinedFilters = (order, continent, activity) => {
           (country) => country.continent === continent
         );
         if(activity === "") filterCountries;
-        else if (activity === "Any") {
-          filterCountries = filterCountries.filter((country) => country.Activities);
-        }
         else{
           filterCountries = filterCountries.filter((country) =>
             country.Activities.some((act) => act.name === activity)
@@ -142,59 +185,6 @@ export const combinedFilters = (order, continent, activity) => {
     }
   };
 };
-
-export const getCountries = () => {
-    return async (dispatch) => {
-        try {
-            const { data } = await axios.get(`${ENDPOINT}/countries`);
-
-            if(!data) throw Error('The countries were not found, check the database');
-
-            return dispatch({
-                type: GET_COUNTRIES,
-                payload: data,
-            })
-        } catch (error) {
-            alert(error.message);
-        }
-    }
-};
-
-export const getActivities = () => {
-    return async function (dispatch) {
-      try {
-        const { data } = await axios.get(`${ENDPOINT}/activities`);
-  
-        return dispatch({
-          type: GET_ACTIVITIES,
-          payload: data
-        });
-      } catch (error) {
-        alert(error.message);
-      }
-    };
-  };
-
-  
-  export const searchCountry = (name) => {
-  return async function (dispatch) {
-    try {
-      const { data } = await axios.get(
-        `${ENDPOINT}/countries/name?name=${name}`
-      );
-      return dispatch({
-        type: SEARCH_COUNTRY,
-        payload: data,
-      });
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-};
-
-
-
-
 
 
 

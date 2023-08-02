@@ -4,14 +4,13 @@ import {Route, Routes, useLocation} from 'react-router-dom';
 
 import {Detail, Home, Landing, NavBar, Form} from './views/routes/routes';
 
-
 function App() {
   
   const location = useLocation();
   
   return (
   
-      <div>
+      <div class="imageAll">
         
         {location.pathname !== "/" && location.pathname !== "/form" && <NavBar/>}
 
