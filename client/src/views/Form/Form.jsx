@@ -114,7 +114,7 @@ const Form = () => {
 
   return (
     <form onSubmit={handleSubmit} className={style.formContainer}> {/*el handle submit es para cuando se crea una actividad*/}
-      <div>
+      <div className={style.formContent}>
         <div className={style.formField}>
           <label>Name: </label>
           <input
@@ -202,9 +202,9 @@ const Form = () => {
               ))}
             </div>
           </div>
-          <div>
+          <div className={style.countryCointeiner}>
             {activity.countries.map((country) => (
-              <div key={country}>
+              <div key={country} className={style.countrySelected}>
                 <span>{country}</span>
                 <button
                   type="button"

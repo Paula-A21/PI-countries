@@ -10,14 +10,13 @@ function App() {
   
   return (
   
-      <div class="imageAll">
+      <div>
         
         {location.pathname !== "/" && location.pathname !== "/form" && <NavBar/>}
 
         <Routes>
 
             <Route path = '/' element = {<Landing/>}/>
-            {/* <Route path = '/home' element = {<NavBar/>}/> */}
             <Route path = '/home' element = {<Home/>}/>
             <Route path = '/detail/:id' element = {<Detail/>}/>
             <Route path = 'activities/form' element = {<Form/>}/>

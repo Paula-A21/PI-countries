@@ -1,12 +1,9 @@
-/* Landing.module.css */
-
 .background {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
-  /* background-image: url(./descarga.jpg); */
   background-size: cover;
   background-position: center;
 }
