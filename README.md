@@ -12,9 +12,11 @@
 ![image](https://github.com/Paula-A21/PI-countries/assets/118852959/005a4fcb-a81e-4144-881d-7934c52cd92f)
 
 
-![image](https://github.com/Paula-A21/PI-countries/assets/118852959/831133c5-fafd-4219-83b9-c051e4db934a)
+![image](https://github.com/Paula-A21/PI-countries/assets/118852959/8b6939ca-1b04-4108-8ad4-91fa2c0f90c3)
 
-![image](https://github.com/Paula-A21/PI-countries/assets/118852959/92f12bc1-9101-4c50-a9f7-6c37c21732eb)
+
+![image](https://github.com/Paula-A21/PI-countries/assets/118852959/a5b8424f-74f4-4064-8b38-9be94bff771a)
+
 
 
 
