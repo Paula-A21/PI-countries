@@ -39,6 +39,7 @@ const Paginated = ({ countriesPerPage, countries, paginated, currentPage }) => {
         &lt; {/*esto representa al símbolo >, para ir a la siguiente página*/}
       </button>
 
+      {/*aca hago el renderizado de los numeros de las paginas*/}
       {nearbyPages.map((pageNumber) => (
         <button
           key={pageNumber}

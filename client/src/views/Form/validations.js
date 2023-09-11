@@ -1,6 +1,9 @@
 const validations = (activity) => {
   const errors = {};
 
+  if(activity.name[0] === " "){
+    errors.name = "Can not start with an empty space."
+  }
   if (!activity.name) {
     errors.name = "Required field";
   } else if (!/^[A-Za-z\s]+$/.test(activity.name)) {
@@ -18,6 +21,9 @@ const validations = (activity) => {
     errors.difficulty = "The difficulty range can only be from 1 to 5";
   }
 
+  if (activity.duration === "00:00"){
+    errors.duration = "The duration can't be 0.";
+  }
   if (activity.duration > 24) {
     errors.duration = "The duration can't be more than 24 hours";
   }

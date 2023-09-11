@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import style from "./Detail.module.css"; // Importamos el módulo CSS específico para este componente
 
 const Detail = () => {
@@ -49,6 +49,21 @@ const Detail = () => {
       <div className={style.detailItem}>
         <span className={style.detailLabel}>Population:</span>
         <span className={style.detailValue}>{country.population}</span>
+      </div>
+      <div>
+        <span>Activities: </span>
+       {country.Activities?.map((activity) => {
+          return (
+            
+            <>
+            <span>Name: {activity.name}</span>
+            <span>Dificulty: {activity.difficulty}</span>
+            <span>Season: {activity.season}</span>
+            <span>Duration: {activity.duration}</span>
+          </>
+          )
+         
+       }) }
       </div>
     </div>
   );

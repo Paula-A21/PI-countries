@@ -16,6 +16,7 @@ function Cards({ currentCountries }) { //recibe props desde Home, para mostrar s
                 name={country.name} 
                 flags={country.flags}
                 continent={country.continent}
+                activities={country.Activities}
               />
             )
         })

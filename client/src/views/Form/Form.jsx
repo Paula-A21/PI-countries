@@ -7,8 +7,8 @@ import { useNavigate } from "react-router-dom";
 import style from "./Form.module.css";
 
 const Form = () => {
-  const dispatch = useDispatch();
   const countries = useSelector((state) => state.countries);
+  const dispatch = useDispatch();
   const navigate = useNavigate(); //cada vez que creo una actividad me devuelve al form
 
   const [activity, setActivity] = useState({
@@ -20,6 +20,7 @@ const Form = () => {
     countrySearch: "",
     searchResults: [],
   });
+
 
   useEffect(() => {
     dispatch(getCountries());
@@ -100,8 +101,12 @@ const Form = () => {
       .post("http://localhost:3001/activities/form", activityData)
       .then((res) => {
         console.log("Response from server:", res.data);
-        alert("Activity created successfully!");
-        navigate("/home");
+        const confirmed = window.confirm("Are you sure you want to submit?");
+        if(confirmed){
+          alert("Activity created successfully!");
+          navigate("/home");
+        }
+  
       })
       .catch((error) => {
         console.error("Error creating activity:", error);
@@ -149,7 +154,7 @@ const Form = () => {
             onChange={changeHandler}
           />
           {errors.countries && (
-            <span className={style.formError}>{errors.countries}</span>
+            <span className={style.formError}>{errors.duration}</span>
           )}
         </div>
         <div>
