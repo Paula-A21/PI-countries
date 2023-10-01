@@ -17,11 +17,15 @@ const Detail = () => {
     });
     return setCountry({});
   }, [id]);
-  
+
   return (
     <div className={style.detailContainer}>
       <h2 className={style.detailHeading}>Country Details</h2>
-      <img src={country.flags} alt={country.name} className={style.detailImage} />
+      <img
+        src={country.flags}
+        alt={country.name}
+        className={style.detailImage}
+      />
       <div className={style.detailItem}>
         <span className={style.detailLabel}>ID:</span>
         <span className={style.detailValue}>{id}</span>
@@ -52,18 +56,18 @@ const Detail = () => {
       </div>
       <div>
         <span>Activities: </span>
-       {country.Activities?.map((activity) => {
-          return (
-            
-            <>
-            <span>Name: {activity.name}</span>
-            <span>Dificulty: {activity.difficulty}</span>
-            <span>Season: {activity.season}</span>
-            <span>Duration: {activity.duration}</span>
-          </>
-          )
-         
-       }) }
+        {country.Activities?.length > 0 ? (
+          country.Activities.map((activity) => (
+            <div key={activity.name}>
+              <span>Name: {activity.name}</span>
+              <span>Dificulty: {activity.difficulty}</span>
+              <span>Season: {activity.season}</span>
+              <span>Duration: {activity.duration}</span>
+            </div>
+          ))
+        ) : (
+          <span>There are not activities related with this country</span>
+        )}
       </div>
     </div>
   );
