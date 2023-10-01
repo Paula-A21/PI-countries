@@ -1,3 +1,28 @@
+![image](https://github.com/Paula-A21/PI-countries/assets/118852959/650b9ffb-e814-4a41-ada6-dac5e05aeaba)
+
+
+![image](https://github.com/Paula-A21/PI-countries/assets/118852959/bc810eac-ccc9-4b45-b449-b1d565df476c)
+
+
+![image](https://github.com/Paula-A21/PI-countries/assets/118852959/3d1bf47d-784c-4b69-a9d0-aca7fc6b490e)
+
+
+![image](https://github.com/Paula-A21/PI-countries/assets/118852959/03dd57d5-d5c1-42f8-beba-d5b338a6579e)
+
+![image](https://github.com/Paula-A21/PI-countries/assets/118852959/005a4fcb-a81e-4144-881d-7934c52cd92f)
+
+
+![image](https://github.com/Paula-A21/PI-countries/assets/118852959/8b6939ca-1b04-4108-8ad4-91fa2c0f90c3)
+
+
+![image](https://github.com/Paula-A21/PI-countries/assets/118852959/a5b8424f-74f4-4064-8b38-9be94bff771a)
+
+
+
+
+
+
+
 ![HenryLogo](https://d31uz8lwfmyn8g.cloudfront.net/Assets/logo-henry-white-lg.png)
 
 # **COUNTRIES** | Proyecto Individual
