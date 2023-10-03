@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";  // Cambiado a useNavigate
 import style from "./Detail.module.css";
 
 const Detail = () => {
   const { id } = useParams();
   const [country, setCountry] = useState({});
+  const navigate = useNavigate();  // Cambiado a useNavigate
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,11 +28,16 @@ const Detail = () => {
     return () => setCountry({});
   }, [id]);
 
+  const handleGoBack = () => {
+    navigate(-1);  // Cambiado a navigate(-1)
+  };
+
   return (
     <div
       className={style.detailContainer}
       style={{ backgroundImage: `url(${country.flags})` }}
     >
+      <button onClick={handleGoBack}>⬅️</button>
       {/* <h2 className={style.detailHeading}>Country Details</h2>
       <img src={country.flags} alt={country.name} className={style.detailImage} /> */}
       <div className={style.detailItem}>
