@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams, useNavigate } from "react-router-dom";  // Cambiado a useNavigate
+import { useParams, useNavigate } from "react-router-dom";
 import style from "./Detail.module.css";
 
 const Detail = () => {
   const { id } = useParams();
   const [country, setCountry] = useState({});
-  const navigate = useNavigate();  // Cambiado a useNavigate
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,8 +28,16 @@ const Detail = () => {
     return () => setCountry({});
   }, [id]);
 
-  const handleGoBack = () => {
-    navigate(-1);  // Cambiado a navigate(-1)
+  useEffect(() => {
+    setCountry({}); // Limpiar los detalles al iniciar la búsqueda
+  }, [id]);
+
+  // Redirigir al usuario a la página principal al iniciar una búsqueda
+  const handleSearchChange = (event) => {
+    const searchTerm = event.target.value.trim();
+    if (searchTerm) {
+      navigate('/home');
+    }
   };
 
   return (
@@ -37,35 +45,34 @@ const Detail = () => {
       className={style.detailContainer}
       style={{ backgroundImage: `url(${country.flags})` }}
     >
-      <button onClick={handleGoBack}>⬅️</button>
       {/* <h2 className={style.detailHeading}>Country Details</h2>
       <img src={country.flags} alt={country.name} className={style.detailImage} /> */}
       <div className={style.detailItem}>
-        <span className={style.detailLabel}>ID:</span>
+        <span className={style.detailLabel}>ID: </span>
         <span className={style.detailValue}>{id}</span>
       </div>
       <div className={style.detailItem}>
-        <span className={style.detailLabel}>Name:</span>
+        <span className={style.detailLabel}>Name: </span>
         <span className={style.detailValue}>{country.name}</span>
       </div>
       <div className={style.detailItem}>
-        <span className={style.detailLabel}>Continent:</span>
+        <span className={style.detailLabel}>Continent: </span>
         <span className={style.detailValue}>{country.continent}</span>
       </div>
       <div className={style.detailItem}>
-        <span className={style.detailLabel}>Capital:</span>
+        <span className={style.detailLabel}>Capital: </span>
         <span className={style.detailValue}>{country.capital}</span>
       </div>
       <div className={style.detailItem}>
-        <span className={style.detailLabel}>Subregion:</span>
+        <span className={style.detailLabel}>Subregion: </span>
         <span className={style.detailValue}>{country?.subregion}</span>
       </div>
       <div className={style.detailItem}>
-        <span className={style.detailLabel}>Area:</span>
+        <span className={style.detailLabel}>Area: </span>
         <span className={style.detailValue}>{country?.area}</span>
       </div>
       <div className={style.detailItem}>
-        <span className={style.detailLabel}>Population:</span>
+        <span className={style.detailLabel}>Population: </span>
         <span className={style.detailValue}>{country.population}</span>
       </div>
       <div className={style.detailItem}>
@@ -74,20 +81,22 @@ const Detail = () => {
           country.Activities.map((activity) => (
             <div key={activity.name} className={style.activity}>
               <div className={style.activityColumn}>
-                <span className={style.detailLabel}>Name:</span>
+                <span className={style.detailLabel}>Name: </span>
                 <span className={style.detailValue}>{activity.name}</span>
               </div>
               <div className={style.activityColumn}>
-                <span className={style.detailLabel}>Difficulty:</span>
+                <span className={style.detailLabel}>Difficulty: </span>
                 <span className={style.detailValue}>{activity.difficulty}</span>
               </div>
               <div className={style.activityColumn}>
-                <span className={style.detailLabel}>Season:</span>
+                <span className={style.detailLabel}>Season: </span>
                 <span className={style.detailValue}>{activity.season}</span>
               </div>
               <div className={style.activityColumn}>
-                <span className={style.detailLabel}>Duration:</span>
-                <span className={style.detailValue}>{activity.duration}</span>
+                <span className={style.detailLabel}>Duration: </span>
+                <span className={style.detailValue}>
+                  {activity.duration ? activity.duration : "-"}
+                </span>
               </div>
             </div>
           ))

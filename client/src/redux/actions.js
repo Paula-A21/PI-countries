@@ -6,7 +6,8 @@ import {
   COMBINED_FILTERS,
   GET_COUNTRIES,
   GET_ACTIVITIES,
-  SEARCH_COUNTRY
+  SEARCH_COUNTRY,
+  CLEAR_FILTERS
 } from "./action-types";
 
 const ENDPOINT = "http://localhost:3001";
@@ -74,10 +75,9 @@ export const getActivities = () => {
   };
 };
 
-
-
-
-
+export const clearFilters = () => {
+  return { type: CLEAR_FILTERS};
+};
 
 export const combinedFilters = (order, continent, activity) => {
 
@@ -86,6 +86,7 @@ export const combinedFilters = (order, continent, activity) => {
       const { data } = await axios.get(`${ENDPOINT}/countries`);
 
       let filterCountries = data;
+
 
       if (order && !continent && !activity) {
         // Filtrar y ordenar si se proporciona solo el parámetro 'order'

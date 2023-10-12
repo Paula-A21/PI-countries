@@ -5,7 +5,8 @@ import {
   SET_FILTER_CONTINENT,
   SET_FILTER_ACTIVITY,
   COMBINED_FILTERS,
-  SEARCH_COUNTRY
+  SEARCH_COUNTRY, 
+  CLEAR_FILTERS
 } from "./action-types";
 
 const initialState = {
@@ -19,6 +20,15 @@ const initialState = {
 
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
+    case CLEAR_FILTERS:
+    return {
+      ...state,
+      order: '',
+      filterContinent: '',
+      filterActivity: '',
+      countries: state.allCountries, 
+    };
+
     case GET_COUNTRIES:
       return {
         ...state,
