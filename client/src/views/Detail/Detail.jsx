@@ -41,16 +41,17 @@ const Detail = () => {
   };
 
   return (
-    <div
-      className={style.detailContainer}
-      style={{ backgroundImage: `url(${country.flags})` }}
-    >
+    <div>
       {/* <h2 className={style.detailHeading}>Country Details</h2>
       <img src={country.flags} alt={country.name} className={style.detailImage} /> */}
-      <div className={style.detailItem}>
-        <span className={style.detailLabel}>ID: </span>
-        <span className={style.detailValue}>{id}</span>
-      </div>
+      <div  
+      className={style.detailContainer}
+      style={{ backgroundImage: `url(${country.flags})` }}
+      >
+     <div className={style.detailItem}>
+      <span className={style.detailLabel}>ID:</span>
+      <span className={style.detailValue}>{id}</span>
+    </div>
       <div className={style.detailItem}>
         <span className={style.detailLabel}>Name: </span>
         <span className={style.detailValue}>{country.name}</span>
@@ -76,35 +77,29 @@ const Detail = () => {
         <span className={style.detailValue}>{country.population}</span>
       </div>
       <div className={style.detailItem}>
-        <span className={style.detailLabel}>Activities: </span>
-        {country.Activities?.length > 0 ? (
-          country.Activities.map((activity) => (
-            <div key={activity.name} className={style.activity}>
-              <div className={style.activityColumn}>
-                <span className={style.detailValue}>{activity.name}</span>
-              </div>
-              <div className={style.activityColumn}>
-                <span className={style.detailLabel}>Difficulty: </span>
-                <span className={style.detailValue}>{activity.difficulty}</span>
-              </div>
-              <div className={style.activityColumn}>
-                <span className={style.detailLabel}>Season: </span>
-                <span className={style.detailValue}>{activity.season}</span>
-              </div>
-              <div className={style.activityColumn}>
-                <span className={style.detailLabel}>Duration: </span>
-                <span className={style.detailValue}>
-                  {activity.duration ? activity.duration : "-"}
-                </span>
-              </div>
-            </div>
-          ))
-        ) : (
-          <span>There are no activities related to this country</span>
-        )}
-      </div>
+      <div className={style.detailItem}>
     </div>
-  );
-};
+    </div>
+    </div>
+  <span className={style.detailLabel}>Activities: </span>
+  <div className={style.activitiesContainer}>
+  {country?.Activities?.length === 0 ? (
+        <p className={style.noActivitiesMessage}>There are no activities for this country yet. Create yours!</p>
+      ) : (
+        <div className={style.activitiesContainer}>
+          {country?.Activities?.map((activity) => (
+            <div key={activity.id} className={style.activityCard}>
+              <h3>{activity.name}</h3>
+              <p className={style.activityDetails}>Difficulty: {activity.difficulty}</p>
+              <p className={style.activityDetails}>Duration: {activity.duration} hs</p>
+              <p className={style.activityDetails}>Season: {activity.season}</p>
+            </div>
+          ))}
+        </div>
+      )}
+      </div>
+      </div>
+    );
+  };
 
 export default Detail;
