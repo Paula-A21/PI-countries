@@ -81,7 +81,6 @@ const Detail = () => {
           country.Activities.map((activity) => (
             <div key={activity.name} className={style.activity}>
               <div className={style.activityColumn}>
-                <span className={style.detailLabel}>Name: </span>
                 <span className={style.detailValue}>{activity.name}</span>
               </div>
               <div className={style.activityColumn}>

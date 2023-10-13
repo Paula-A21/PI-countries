@@ -116,12 +116,14 @@ const Home = () => {
           No countries were found with the specified filters or search terms.
         </h1>
       )}
-      <Paginated //renderizo la paginación y la información
-        countriesPerPage={countriesPerPage}
-        countries={countries.length} //le paso el largo para hacer la division de cuantos países voy a mostrar por página, para calcular las páginas que tengo en total
-        paginated={paginated}  //funcion que setea la página actual
-        currentPage={currentPage}
-      />
+      <div className={style.fixedPaginated}>
+        <Paginated
+          countriesPerPage={countriesPerPage}
+          countries={countries.length}
+          paginated={paginated}
+          currentPage={currentPage}
+        />
+      </div>
     </div>
   );
 };
