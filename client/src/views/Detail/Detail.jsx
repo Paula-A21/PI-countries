@@ -48,50 +48,48 @@ const Detail = () => {
       className={style.detailContainer}
       style={{ backgroundImage: `url(${country.flags})` }}
       >
-     <div className={style.detailItem}>
-      <span className={style.detailLabel}>ID:</span>
-      <span className={style.detailValue}>{id}</span>
-    </div>
-      <div className={style.detailItem}>
-        <span className={style.detailLabel}>Name: </span>
-        <span className={style.detailValue}>{country.name}</span>
-      </div>
-      <div className={style.detailItem}>
-        <span className={style.detailLabel}>Continent: </span>
-        <span className={style.detailValue}>{country.continent}</span>
-      </div>
-      <div className={style.detailItem}>
-        <span className={style.detailLabel}>Capital: </span>
-        <span className={style.detailValue}>{country.capital}</span>
-      </div>
-      <div className={style.detailItem}>
-        <span className={style.detailLabel}>Subregion: </span>
-        <span className={style.detailValue}>{country?.subregion}</span>
-      </div>
-      <div className={style.detailItem}>
-        <span className={style.detailLabel}>Area: </span>
-        <span className={style.detailValue}>{country?.area}</span>
-      </div>
-      <div className={style.detailItem}>
-        <span className={style.detailLabel}>Population: </span>
-        <span className={style.detailValue}>{country.population}</span>
-      </div>
-      <div className={style.detailItem}>
-      <div className={style.detailItem}>
-    </div>
-    </div>
-    </div>
-  <span className={style.detailLabel}>Activities: </span>
+  <div className={style.detailItemContainer}>
+  <div className={style.detailItem}>
+    <label className={style.detailLabel}>ID:</label>
+    <span className={style.detailValue}>{id}</span>
+  </div>
+  <div className={style.detailItem}>
+    <span className={style.detailLabel}>Name: </span>
+    <span className={style.detailValue}>{country.name}</span>
+  </div>
+  <div className={style.detailItem}>
+    <span className={style.detailLabel}>Continent: </span>
+    <span className={style.detailValue}>{country.continent}</span>
+  </div>
+  <div className={style.detailItem}>
+    <span className={style.detailLabel}>Capital: </span>
+    <span className={style.detailValue}>{country.capital}</span>
+  </div>
+  <div className={style.detailItem}>
+    <span className={style.detailLabel}>Subregion: </span>
+    <span className={style.detailValue}>{country?.subregion}</span>
+  </div>
+  <div className={style.detailItem}>
+    <span className={style.detailLabel}>Area: </span>
+    <span className={style.detailValue}>{country?.area}</span>
+  </div>
+  <div className={style.detailItem}>
+    <span className={style.detailLabel}>Population: </span>
+    <span className={style.detailValue}>{country.population}</span>
+  </div>
+</div>
+</div>
   <div className={style.activitiesContainer}>
   {country?.Activities?.length === 0 ? (
-        <p className={style.noActivitiesMessage}>There are no activities for this country yet. Create yours!</p>
-      ) : (
-        <div className={style.activitiesContainer}>
+    <p className={style.noActivitiesMessage}>There are no activities for this country yet. Create yours!</p>
+    ) : (
+      <div className={style.activitiesContainer}>
+          <span className={style.activitiesTitle}>Activities: </span>
           {country?.Activities?.map((activity) => (
             <div key={activity.id} className={style.activityCard}>
               <h3>{activity.name}</h3>
               <p className={style.activityDetails}>Difficulty: {activity.difficulty}</p>
-              <p className={style.activityDetails}>Duration: {activity.duration} hs</p>
+              <p className={style.activityDetails}>Schedule: {activity.duration}</p>
               <p className={style.activityDetails}>Season: {activity.season}</p>
             </div>
           ))}
