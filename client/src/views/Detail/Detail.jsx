@@ -91,7 +91,7 @@ const Detail = () => {
             <div key={activity.id} className={style.activityCard}>
               <h3>{activity.name}</h3>
               <p className={style.activityDetails}>Difficulty: {activity.difficulty}</p>
-              <p className={style.activityDetails}>Duration: {activity.duration} hs</p>
+              <p className={style.activityDetails}>Schedule: {activity.duration} hs</p>
               <p className={style.activityDetails}>Season: {activity.season}</p>
             </div>
           ))}

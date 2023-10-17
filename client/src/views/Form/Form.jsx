@@ -109,11 +109,9 @@ const Form = () => {
   
       })
       .catch((error) => {
-        console.error("Error creating activity:", error);
-        if (error.response) {
-          console.error("Error response from server:", error.response.data);
-        }
-        alert("Error creating activity. Please try again.");
+        console.error("Error creating activity:", error.response.data);
+    
+        alert(`Error creating activity. Please try again.`);
       });
   };
 
@@ -146,7 +144,7 @@ const Form = () => {
         </div>
 
         <div className={style.formField}>
-          <label>Duration: </label>
+          <label>Schedule: </label>
           <input
             type="time"
             name="duration"

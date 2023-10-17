@@ -2,10 +2,16 @@
   color: #fff;
 }
 
-.noCounty{
+.noCounty {
   color: #fff;
-  font-size: 24px;
+  font-size: 40px;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center; /* Añade esta línea para centrar verticalmente */
+  height: 80vh; 
 }
+
 
 .select-container {
   display: flex;
