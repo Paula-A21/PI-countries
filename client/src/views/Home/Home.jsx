@@ -37,17 +37,17 @@ const Home = () => {
   };
 
   useEffect(() => {
-    dispatch(getCountries()); //a penas empieza la página uso un use effect para que ya tenga cargados
-    dispatch(getActivities()); //los paises y las actividades
+    // dispatch(getCountries()); //a penas empieza la página uso un use effect para que ya tenga cargados
+    console.log("Aca se ejecuta una");
   }, [dispatch]);
-
+  
   useEffect(() => {
-    if (order || filterContinent || filterActivity)
-      //tengo un use effect para que escuche si hay un cambio en cualquiera de los filtros
+    dispatch(getActivities()); //los paises y las actividades
+    if (order || filterContinent || filterActivity){
       dispatch(
         combinedFilters(order, filterContinent, filterActivity)
-      ); //despacho los filtros hacia la action combined filters
-    else dispatch(getCountries());
+        ); //despacho los filtros hacia la action combined filters
+    }
   }, [order, filterContinent, filterActivity]);
 
   const orderedCountriesHandler = (event) => {

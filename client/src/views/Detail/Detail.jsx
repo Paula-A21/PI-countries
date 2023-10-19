@@ -32,13 +32,13 @@ const Detail = () => {
     setCountry({}); // Limpiar los detalles al iniciar la búsqueda
   }, [id]);
 
-  // Redirigir al usuario a la página principal al iniciar una búsqueda
-  const handleSearchChange = (event) => {
-    const searchTerm = event.target.value.trim();
-    if (searchTerm) {
-      navigate('/home');
-    }
-  };
+  // // Redirigir al usuario a la página principal al iniciar una búsqueda
+  // const handleSearchChange = (event) => {
+  //   const searchTerm = event.target.value.trim();
+  //   if (searchTerm) {
+  //     navigate('/home');
+  //   }
+  // };
 
   return (
     <div>
@@ -79,11 +79,11 @@ const Detail = () => {
   </div>
 </div>
 </div>
-  <div className={style.activitiesContainer}>
+  <div>
   {country?.Activities?.length === 0 ? (
     <p className={style.noActivitiesMessage}>There are no activities for this country yet. Create yours!</p>
     ) : (
-      <div className={style.activitiesContainer}>
+      <div>
           <span className={style.activitiesTitle}>Activities: </span>
           {country?.Activities?.map((activity) => (
             <div key={activity.id} className={style.activityCard}>
