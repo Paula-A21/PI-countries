@@ -1,0 +1,166 @@
+.formContainer {
+    max-width: 500px;
+    margin: 30px auto;
+    padding: 20px;
+    background:none;
+    backdrop-filter: blur (50px);
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;;
+    border-radius: 10px;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+    background-color: rgba(255, 255, 255, 0.5); 
+  }
+
+  .formContent{
+    display: grid;
+  gap: 0px;
+  }
+
+  .searchResults {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+    max-height: 150px;
+    overflow-y: auto;
+  }
+  
+  .selectedCountry {
+    background-color: #007bff;
+    color: #fff;
+  }
+  .addedIndicator{
+    color: #9e0202;
+  }  
+  .countryCointeiner{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 10px;
+  }
+
+  .countrySelected{
+    display: flex;
+    align-items: center;
+  }
+
+  .searchResultItem {
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  .formTitle {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .formField {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+  }
+  
+  .formField label {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .formField input,
+  .formField select {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .formField input[type="time"] {
+    width: 100%;
+  }
+  
+  .formField select {
+    width: 100%;
+  }
+  
+  .formError {
+    color: white;
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+    background-color: red;
+
+    padding: 0 10px 0 10px;
+    text-align: center;
+    border-radius: 10px;
+  }
+  
+option:hover{
+  background-color: #9e0202;
+}
+
+  .formError2{
+    color: white;
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+    background-color: red;
+    width: 30%;
+    left: 50%;
+    position: relative;
+    transform: translateX(-50%);
+    padding: 0 10px 0 10px;
+    text-align: center;
+    border-radius: 10px;
+  }
+
+  .formCountrySearch {
+    position: relative;
+  }
+  
+  .formCountrySearch input {
+    padding: 0.5rem;
+    font-size: 1rem;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .formCountrySearch .searchResultItem:hover{
+    background-color:rgb(0, 123, 225);
+  }
+
+  .formCountrySearch .searchResults {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    color: white;
+    background-color: #373737;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    max-height: 150px;
+    overflow-y: auto;
+  }
+  
+  .formCountrySearch .searchResults div {
+    padding: 0.5rem;
+    cursor: pointer;
+  }
+  
+  .formButton {
+    background-color: #007bff;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    cursor: pointer;
+  }
+  
+  .formButton:disabled {
+    background-color: #9e0202;
+    cursor: not-allowed;
+  }
+  

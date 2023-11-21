@@ -1,0 +1,15 @@
+.NavBar{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1px 0;
+    background-color: rgba(0, 0, 0, 0.186);
+    backdrop-filter: blur(5px);
+}
+
+.buttonsContainer{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
