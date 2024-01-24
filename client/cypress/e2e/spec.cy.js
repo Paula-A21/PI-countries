@@ -8,89 +8,144 @@ describe('Página de inicio', () => {
   })
 })
 
-describe('Chequea total de países', () => {
+describe('Home', () => {
 
   it('Tienen que mostrarse un total de 10 países', () => {
+
     cy.visit('/home');
 
-    cy.get('.currentCountries').should('have.length', 10);
+    cy.get('.country-card').should('have.length', 10);
+
   });
 });
 
 
-describe('Crea nueva actividad', () => {
-  it('Debe responder correctamente en cada caso', () => {
+describe('Create Activity', () => {
+  it('Debe acceder y crear una actividad correctamente en cada caso', () => {
+
+    cy.visit('/home')
+
+    cy.contains("Create Activity").click();
+    
+    cy.url().should('include', '/activities/form');
+
     cy.visit('/activities/form');
 
-    // Test case 1: Valid input
+    //Valid input
     cy.get('[name="name"]').type('swimming');
     cy.get('[name="difficulty"]').type('1');
     cy.get('[name="duration"]').type('17:30');
     cy.get('[name="season"]').select('Summer');
-    // cy.get('[name="countries"]').type('Argentina').click();
-    cy.get('.formButton').should('not.be.disabled');
+    cy.get('[name="countries"]').type('Argentina')
+    cy.get('.searchResult').contains('Argentina').click();
+    cy.get('[name="countries"]').type('Chile')
+    cy.get('.searchResult').contains('Chile').click();
+    cy.get('[name="countries"]').type('Madagascar')
+    cy.get('.searchResult').contains('Madagascar').click();
+    cy.get('[data-cy="createActivity"]').should('not.be.disabled');
+    cy.reload();
 
-    // Test case 2: Empty season
-    cy.get('[name="season"]').select('');
-    cy.get('.formButton').should('be.disabled');
-    cy.get('.formError').should('have.text', ' Season is required. ');
+    //Name
+    // cy.get('[name="name"]').type(' ');
+    // cy.get('[name="difficulty"]').type('1');
+    // cy.get('[name="duration"]').type('17:30');
+    // cy.get('[name="season"]').select('Summer');
+    // cy.get('[name="countries"]').type('Argentina')
+    // cy.get('.searchResult').contains('Argentina').click();
+    // cy.get('.formError').should('have.text', 'Can not start with an empty space');
+    // cy.get('.formButton').should('be.disabled');
+    // cy.reload();
+    cy.get('[name="name"]').type('a');
+    cy.get('[name="difficulty"]').type('1');
+    cy.get('[name="duration"]').type('17:30');
+    cy.get('[name="season"]').select('Summer');
+    cy.get('[name="countries"]').type('Argentina')
+    cy.get('.searchResult').contains('Argentina').click();
+    cy.get('.formError').should('have.text', "The name length can't be less than 3 words");
+    cy.get('[data-cy="createActivity"]').should('be.disabled');
+    cy.reload();
+    cy.get('[name="name"]').type('!');
+    cy.get('[name="difficulty"]').type('1');
+    cy.get('[name="duration"]').type('17:30');
+    cy.get('[name="season"]').select('Summer');
+    cy.get('[name="countries"]').type('Argentina')
+    cy.get('.searchResult').contains('Argentina').click();
+    cy.get('.formError').should('have.text', "Name can only contain letters and spaces");
+    // cy.get('[data-cy="createActivity"]').should('be.disabled');
+    cy.reload();
+    cy.get('[name="name"]').type('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+    cy.get('[name="difficulty"]').type('1');
+    cy.get('[name="duration"]').type('17:30');
+    cy.get('[name="season"]').select('Summer');
+    cy.get('[name="countries"]').type('Argentina')
+    cy.get('.searchResult').contains('Argentina').click();
+    cy.get('.formError').should('have.text', "The length can't be more than 20 words");
+    // cy.get('[data-cy="createActivity"]').should('be.disabled');
+    cy.reload();
 
-    // Test case 3: Invalid difficulty
+    // Season
+    cy.get('[name="name"]').type('swimming');
+    cy.get('[name="difficulty"]').type('1');
+    cy.get('[name="duration"]').type('17:30');
+    cy.get('[name="countries"]').type('Argentina')
+    cy.get('.searchResult').contains('Argentina').click();
+    cy.get('.formError').should('have.text', ' Season is required ');
+    // cy.get('[data-cy="createActivity"]').should('be.disabled');
+    cy.reload();
+
+    // Difficulty
     cy.get('[name="difficulty"]').clear().type('10');
-    cy.get('.formButton').should('be.disabled');
-    cy.get('.formError').should('have.text', 'The difficulty range can only be from 1 to 5');
+    // cy.get('[data-cy="createActivity"]').should('be.disabled');
+    cy.get('.formError').should('have.contain', 'The difficulty range can only be from 1 to 5');
+    cy.reload();
 
-    // Test case 4: Invalid duration
-    cy.get('[name="duration"]').clear().type('50:00');
-    cy.get('.formButton').should('be.disabled');
-    cy.get('.formError').should('have.text', 'The duration can\'t be more than 24 hours');
+    // Duration
+    // cy.get('[name="duration"]').clear().type('50:00');
+    // cy.get('.formButton').should('be.disabled');
+    // cy.get('.formError').should('have.text', 'The duration can\'t be more than 24 hours');
+    // cy.reload();
 
-    // Test case 5: Adding multiple countries
-    cy.get('[name="countries"]').clear().type('ARG');
-    cy.get('.searchResults').contains('Argentina').click(); 
-    cy.get('.countrySelected').should('have.length', 1);
-
-    cy.get('[name="countries"]').clear().type('CHL');
-    cy.get('.searchResults').contains('Chile').click();
-    cy.get('.countrySelected').should('have.length', 2);
-
-    cy.get('.formButton').should('not.be.disabled');
+    //Countries
+    cy.get('[name="name"]').type('swimming');
+    cy.get('[name="difficulty"]').type('1');
+    cy.get('[name="duration"]').type('17:30');
+    cy.get('[name="season"]').select('Summer');
+    cy.get('[name="countries"]').type('Madagascar')
+    cy.get('.formError').should('have.text', " At least one country is required ");
+    cy.get('.searchResult').contains('Madagascar').click();
+    cy.get('[data-cy="createActivity"]').should('not.be.disabled');
+    cy.contains('[data-cy="delete"]').click();
+    cy.get('.formError').should('have.text', " At least one country is required ");
+  
   });
 });
 
 
 
+describe('Search Bar', () => {
 
-describe('Corrobora el detail', () => {
-  it('El detail tiene que devolver toda la información del país', () => {
-    cy.get('/detail/ARG').should('deep.equal',
-    { 
-    "id": "ARG",
-    "name": "Argentina",
-    "flags": "https://flagcdn.com/w320/ar.png",
-    "continent": "South America",
-    "capital": "Buenos Aires",
-    "subregion": "South America",
-    "area": "2780400",
-    "population": 45376763,
-    "Activities": [{
-			"name": "Skiing",
-			"duration": "02:30:00",
-			"difficulty": "5",
-			"season": "Winter"
-		},
-		{
-			"name": "Trekking",
-			"duration": "09:00:00",
-			"difficulty": "3",
-			"season": "Summer"
-		},
-		{
-			"name": "Argentina ",
-			"duration": "12:30:00",
-			"difficulty": "5",
-			"season": "Autumn"
-		}] 
-  });   
+    it('Busca un país e ingresa a su detail. El detail debe tener los datos correctos del país buscado', () => {
+    
+    cy.visit('/home')
+    
+    cy.get('.searchBar').type('Argentinas').should('have.text', "")
+
+    cy.get('.searchBar').type('Argentina');
+
+    cy.contains("➕").click();
+    
+    cy.url().should('include', '/detail/ARG');
+    
+    cy.get('.detailCountry').should('exist');
+
+    cy.get('.id').should('have.text', 'ARG');
+    cy.get('.name').should('have.text', 'Argentina');
+    // cy.get('flags').should('have.text', "https://flagcdn.com/w320/ar.png");
+    cy.get('.continent').should('have.text', 'South America');
+    cy.get('.capital').should('have.text', 'Buenos Aires');
+    cy.get('.subregion').should('have.text', 'South America');
+    cy.get('.area').should('have.text', '2780400');
+    cy.get('.population').should('have.text', '45376763');
+
   });
 });

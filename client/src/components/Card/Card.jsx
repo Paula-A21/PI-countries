@@ -6,7 +6,7 @@ function Card(country) {
   const { id, name, flags, continent } = country;
 
   return (
-    <div className={style.container}>
+    <div className={`${style.container} country-card`}>
       <img className={style.cardImage} src={flags} alt={name} />
       <div className={style.contentContainer}>
         <h2 className={style.title}>{name}</h2>

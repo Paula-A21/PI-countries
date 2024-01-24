@@ -128,7 +128,7 @@ const Form = () => {
             onChange={changeHandler}
           />
           {errors.name && (
-            <span className={style.formError2}>{errors.name}</span>
+            <span className={`${style.formError2} formError`}>{errors.name}</span>
           )}
         </div>
         <div className={style.formField}>
@@ -140,7 +140,7 @@ const Form = () => {
             onChange={changeHandler}
           />
           {errors.difficulty && (
-            <span className={style.formError2}>{errors.difficulty}</span>
+            <span className={`${style.formError2} formError`}>{errors.difficulty}</span>
           )}
         </div>
 
@@ -153,7 +153,7 @@ const Form = () => {
             onChange={changeHandler}
           />
           {errors.countries && (
-            <span className={style.formError}>{errors.duration}</span>
+            <span className={`${style.formError} formError`}>{errors.duration}</span>
           )}
         </div>
         <div>
@@ -172,7 +172,7 @@ const Form = () => {
             <option value="Spring">Spring</option>
           </select>
           {errors.season && (
-            <span className={style.formError}>{errors.season}</span>
+            <span className={`${style.formError} formError`}>{errors.season}</span>
           )}
         </div>
 
@@ -187,13 +187,13 @@ const Form = () => {
               placeholder="Search countries..."
             />
             {errors.countries && (
-              <span className={style.formError}>{errors.countries}</span>
+              <span className={`${style.formError} formError`}>{errors.countries}</span>
             )}
             <div className={style.searchResults}>
               {activity.searchResults.map((country) => ( //mapeo los países para buscarlos y que me vaya mostrando las opciones
                 <div
                   key={country.name}
-                  className={`${style.searchResultItem} ${
+                  className={`${style.searchResultItem} searchResult ${
                     selectedCountry === country.name ? style.selectedCountry : ""
                   }`}
                   onClick={() => handleAddCountry(country)}
@@ -212,6 +212,7 @@ const Form = () => {
                 <span>{country}</span>
                 <button
                   type="button"
+                  data-cy="delete"
                   onClick={() => handleRemoveCountry(country)}
                 >
                   🗑️
@@ -224,7 +225,7 @@ const Form = () => {
           activity.season &&
           activity.countries.length > 0 &&
           Object.keys(errors).length === 0 ? (
-            <button className={style.formButton}>CREATE ACTIVITY</button>
+            <button className={`${style.formButton} data-cy="createActivity"`}>CREATE ACTIVITY</button>
           ) : (
             <button className={style.formButton} disabled>
               Some fields are missing
