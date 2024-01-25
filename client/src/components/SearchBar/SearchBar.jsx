@@ -25,7 +25,7 @@ const SearchBar = ({ searchValue, onSearchChange }) => {
   };
 
   return (
-    <div className={style.SearchBar}>
+    <div className={`${style.SearchBar} searchBar`}>
       <input
         className={style.inputSearch}
         type="search"
