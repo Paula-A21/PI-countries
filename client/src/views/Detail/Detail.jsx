@@ -54,7 +54,7 @@ const Detail = () => {
       {/* <h2 className={style.detailHeading}>Country Details</h2>
       <img src={country.flags} alt={country.name} className={style.detailImage} /> */}
       <div
-        className={style.detailContainer}
+        className={`${style.detailContainer} flags`}
         style={{ backgroundImage: `url(${country.flags})` }}
       >
         <div className={`${style.detailItemContainer} detailCountry`}>

@@ -225,7 +225,7 @@ const Form = () => {
           activity.season &&
           activity.countries.length > 0 &&
           Object.keys(errors).length === 0 ? (
-            <button className={`${style.formButton} data-cy="createActivity"`}>CREATE ACTIVITY</button>
+            <button className={`${style.formButton} data-cy="createActivity" createActivity`}>CREATE ACTIVITY</button>
           ) : (
             <button className={style.formButton} disabled>
               Some fields are missing

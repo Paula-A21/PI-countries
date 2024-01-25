@@ -37,7 +37,7 @@ export const getCountries = () => {
           payload: data,
         });
       })
-      .catch((error) => alert(error.message));
+      .catch((error) => console.log(error.message));
   };
 };
 
@@ -51,7 +51,7 @@ export const getActivities = () => {
           payload: data,
         });
       })
-      .catch((error) => alert(error.message));
+      .catch((error) => console.log(error.message));
   };
 };
 
@@ -65,7 +65,7 @@ export const searchCountry = (name) => {
           payload: data,
         });
       })
-      .catch((error) => alert(error.message));
+      .catch((error) => console.log(error.message));
   };
 };
 
@@ -175,6 +175,6 @@ export const combinedFilters = (order, continent, activity) => {
 
         return dispatch({ type: COMBINED_FILTERS, payload: filterCountries });
       })
-      .catch((error) => alert(error.message));
+      .catch((error) => console.log(error.message));
   };
 };

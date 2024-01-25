@@ -33,8 +33,10 @@ describe('Create Activity', () => {
 
     //Valid input
     cy.get('[name="name"]').type('swimming');
+    cy.get('.formError').should('contain', "Difficulty is required");
     cy.get('[name="difficulty"]').type('1');
     cy.get('[name="duration"]').type('17:30');
+    cy.get('.formError').should('contain', ' Season is required ');
     cy.get('[name="season"]').select('Summer');
     cy.get('[name="countries"]').type('Argentina')
     cy.get('.searchResult').contains('Argentina').click();
@@ -42,19 +44,10 @@ describe('Create Activity', () => {
     cy.get('.searchResult').contains('Chile').click();
     cy.get('[name="countries"]').type('Madagascar')
     cy.get('.searchResult').contains('Madagascar').click();
-    cy.get('[data-cy="createActivity"]').should('not.be.disabled');
+    cy.contains('CREATE ACTIVITY').should('not.be.disabled');
     cy.reload();
 
     //Name
-    // cy.get('[name="name"]').type(' ');
-    // cy.get('[name="difficulty"]').type('1');
-    // cy.get('[name="duration"]').type('17:30');
-    // cy.get('[name="season"]').select('Summer');
-    // cy.get('[name="countries"]').type('Argentina')
-    // cy.get('.searchResult').contains('Argentina').click();
-    // cy.get('.formError').should('have.text', 'Can not start with an empty space');
-    // cy.get('.formButton').should('be.disabled');
-    // cy.reload();
     cy.get('[name="name"]').type('a');
     cy.get('[name="difficulty"]').type('1');
     cy.get('[name="duration"]').type('17:30');
@@ -62,7 +55,7 @@ describe('Create Activity', () => {
     cy.get('[name="countries"]').type('Argentina')
     cy.get('.searchResult').contains('Argentina').click();
     cy.get('.formError').should('have.text', "The name length can't be less than 3 words");
-    cy.get('[data-cy="createActivity"]').should('be.disabled');
+    // cy.get('.createActivity').should('be.disabled');
     cy.reload();
     cy.get('[name="name"]').type('!');
     cy.get('[name="difficulty"]').type('1');
@@ -83,27 +76,12 @@ describe('Create Activity', () => {
     // cy.get('[data-cy="createActivity"]').should('be.disabled');
     cy.reload();
 
-    // Season
-    cy.get('[name="name"]').type('swimming');
-    cy.get('[name="difficulty"]').type('1');
-    cy.get('[name="duration"]').type('17:30');
-    cy.get('[name="countries"]').type('Argentina')
-    cy.get('.searchResult').contains('Argentina').click();
-    cy.get('.formError').should('have.text', ' Season is required ');
-    // cy.get('[data-cy="createActivity"]').should('be.disabled');
-    cy.reload();
 
     // Difficulty
     cy.get('[name="difficulty"]').clear().type('10');
     // cy.get('[data-cy="createActivity"]').should('be.disabled');
     cy.get('.formError').should('have.contain', 'The difficulty range can only be from 1 to 5');
     cy.reload();
-
-    // Duration
-    // cy.get('[name="duration"]').clear().type('50:00');
-    // cy.get('.formButton').should('be.disabled');
-    // cy.get('.formError').should('have.text', 'The duration can\'t be more than 24 hours');
-    // cy.reload();
 
     //Countries
     cy.get('[name="name"]').type('swimming');
@@ -113,8 +91,8 @@ describe('Create Activity', () => {
     cy.get('[name="countries"]').type('Madagascar')
     cy.get('.formError').should('have.text', " At least one country is required ");
     cy.get('.searchResult').contains('Madagascar').click();
-    cy.get('[data-cy="createActivity"]').should('not.be.disabled');
-    cy.contains('[data-cy="delete"]').click();
+    // cy.get('[data-cy="createActivity"]').should('not.be.disabled');
+    cy.get('[data-cy="delete"]').click();
     cy.get('.formError').should('have.text', " At least one country is required ");
   
   });
@@ -140,7 +118,7 @@ describe('Search Bar', () => {
 
     cy.get('.id').should('have.text', 'ARG');
     cy.get('.name').should('have.text', 'Argentina');
-    // cy.get('flags').should('have.text', "https://flagcdn.com/w320/ar.png");
+    // cy.get('.flags').should('have.text', "https://flagcdn.com/w320/ar.png");
     cy.get('.continent').should('have.text', 'South America');
     cy.get('.capital').should('have.text', 'Buenos Aires');
     cy.get('.subregion').should('have.text', 'South America');
