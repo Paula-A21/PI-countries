@@ -5,6 +5,11 @@ describe('Página de inicio', () => {
     cy.contains("Let's travel together!").click();
 
     cy.url().should('include', '/home');
+
+    cy.contains('Landing').click();
+
+    cy.url().should('include', '/');
+
   })
 })
 
